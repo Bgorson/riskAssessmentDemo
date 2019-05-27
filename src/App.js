@@ -14,6 +14,8 @@ class App extends Component {
       <Router>
       <div className= "container">
       <h1>Welcome to home page</h1>
+      <a href= "/">Click here to see your todo list</a>
+      <a href= "/create">Click here to create a todo item</a>
         </div>
         <Route path = "/" exact component = {TodosList} />
         <Route path = "/edit/:id" component = {EditTodo} />
