@@ -1,19 +1,16 @@
 const mongoose = require('mongoose')
 const Schema= mongoose.Schema;
 
-let Todo = new Schema({
-    todo_description:{
+let Resident = new Schema({
+    resident_name:{
         type:String
     },
-    todo_responsible:{
+    resident_arrival:{
         type: String
     },
-    todo_priority: {
-        type:String
-    },
-    todo_completed: {
-        type:Boolean
+    documents: {
+
     }
 })
 
-module.exports= mongoose.model('Todo', Todo)
+module.exports= mongoose.model('Resident', Resident)

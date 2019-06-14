@@ -5,10 +5,8 @@ export default class CreateTodo extends Component {
     constructor(){
         super()
         this.state= {
-            todo_description:'',
-            todo_responsible:'',
-            todo_priority:'',
-            todo_completed:false
+            resident_name:'',
+            resident_arrival:'',
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -18,10 +16,13 @@ export default class CreateTodo extends Component {
     }
     handleSubmit(event){
         let task = {
-                todo_description:this.state.todo_description,
-                todo_responsible:this.state.todo_responsible,
-                todo_priority:this.state.todo_priority,
-                todo_completed:this.state.todo_completed
+                resident_name:this.state.resident_name,
+                resident_arrival:this.state.resident_arrival,
+                documents: {
+                    consents: false,
+                    treatmentPlan:false,
+                    admissionNote:true
+                }
         }
         console.log(task)
         event.preventDefault()
@@ -34,16 +35,13 @@ export default class CreateTodo extends Component {
     render(){
         return (
             <div>
-                <p>Welcome to Creat to Do List Component</p>
+                <p>Welcome to Create Resident</p>
                 <form onSubmit={this.handleSubmit}>
-                    <label> Description
-                <input onChange= {this.handleChange} name="todo_description"  type = "text" value = {this.state.todo_description} ></input>
+                    <label> Resident Name
+                <input onChange= {this.handleChange} name="resident_name"  type = "text" value = {this.state.resident_name} ></input>
                 </label>
-                <label>Person Responsible
-                <input onChange= {this.handleChange} name="todo_responsible"  type = "text" value = {this.state.todo_responsible} ></input>
-                </label>
-                <label>Priority
-                <input onChange= {this.handleChange}  name="todo_priority" type = "text" value = {this.state.todo_priority}></input>
+                <label>Date Arriving
+                <input onChange= {this.handleChange} name="resident_arrival"  type = "text" value = {this.state.resident_arrival} ></input>
                 </label>
                 <input type="submit"  />
                 </form>

@@ -5,23 +5,29 @@ export default class TodosList extends Component {
     constructor(){
         super()
         this.state= {
-            tasks:[]
+            residents:[]
         }
 
     }
     componentDidMount(){
     axios.get('/todos').then(res =>{
-        const tasks =res.data;
-        this.setState({tasks})
+        const residents =res.data;
+        console.log(residents)
+        this.setState({residents})
     })
     }
     render(){
         return (
             <div>
-                <p>Welcome to Todos List Component</p>
+                <p>Welcome to your Residents</p>
+                { this.state.residents.map(resident=> 
                 <ul>
-                { this.state.tasks.map(task=> <li>{task.todo_description}</li>)}
+                <a href= {'detail/' + resident._id}> Click for details</a>
+                <li id = {resident._id}>Name: {resident.resident_name}</li>
+                <li>Date of Arrival: {resident.resident_arrival}</li>
                 </ul>
+                )}
+               
             </div>
         )
     }
