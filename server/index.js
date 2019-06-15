@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 // match one above, send back React's index.html file.
 if (process.env.NODE_ENV === 'production'){
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/public/index.html'));
+  res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 }
 
