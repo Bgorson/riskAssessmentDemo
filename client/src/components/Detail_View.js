@@ -19,7 +19,9 @@ class Detail_View extends Component {
     handleSubmit(event){
         let update = {
                 documents: {
+                    consents: this.state.consent,
                     treatmentPlan:this.state.treatment_date,
+                    admissionNote:this.state.admission
                 }
         }
         console.log(update)
@@ -36,11 +38,15 @@ class Detail_View extends Component {
             consent:!this.state.consent
         })
         console.log("clicked")
-        let currentConsent= this.state.consent
+        let currentConsent= !this.state.consent
         console.log(currentConsent)
         let update = {
+            resident_name:this.state.resident_name,
+            resident_arrival:this.state.resident_arrival,
             documents: {
-                consents: currentConsent
+                consents: currentConsent,
+                treatmentPlan:this.state.treatment_date,
+                admissionNote:this.state.admission
             }
         }
         console.log(update)
@@ -60,8 +66,8 @@ class Detail_View extends Component {
                 name:res.data.resident_name,
                 arrival: res.data.resident_arrival,
                 consent: (res.data.documents.consents),
-                treatmentPlan: JSON.stringify(res.data.documents.treatmentPlan),
-                admission: JSON.stringify(res.data.documents.admissionNote)
+                treatmentPlan: res.data.documents.treatment_date,
+                admission: res.data.documents.admissionNote
             })
         })
     }

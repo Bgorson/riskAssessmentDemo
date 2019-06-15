@@ -61,16 +61,18 @@ residentRoute.route('/update/:id').post(function (req, res) {
   console.log(data)
   console.log("updating")
 
-  Resident.findOneAndUpdate({
-      _id: id
-    }, {
-      $set: {
-        documents: data,
-      }
-    },
+  Resident.update(
+    {_id: id}, 
+    { $set: 
+    data,
+  }, {upset:true}
+    ,
     (err, data) => {
       if (err) {
         console.log("Some kind of err", err)
+      }
+      else {
+        console.log(data)
       }
     })
 })
