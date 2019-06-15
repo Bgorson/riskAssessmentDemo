@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 4000;
 const mongoose = require('mongoose')
 const residentRoute = express.Router();
-let Resident = require("./model")
+let Resident = require("./models/model.js")
 const path = require('path');
 
 
