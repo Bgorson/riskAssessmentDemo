@@ -13,17 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 // app.use(pino);
 app.use(bodyParser.json())
-// Serve static files from the React app
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-if (process.env.NODE_ENV === 'production'){
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/public/index.html'));
-});
-}
 
 mongoose.connect(process.env.MONGODB_URI ||"mongodb://127.0.0.1:27017/Resident", {
   useNewUrlParser: true
@@ -87,6 +77,19 @@ residentRoute.route('/update/:id').post(function (req, res) {
 
 
 app.use('/todos', residentRoute)
+
+// Serve static files from the React app
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.use(express.static(path.join(__dirname, "client", "build")))
+if (process.env.NODE_ENV === 'production'){
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+}
 
 app.listen(PORT, () =>
   console.log('Express server is running on localhost:', PORT)
