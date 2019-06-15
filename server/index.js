@@ -16,28 +16,15 @@ app.use(bodyParser.json())
 // Serve static files from the React app
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-if (process.env.NODE_ENV == 'production'){
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/public/index.html'));
-  });
-  }
-  else {
-    app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-    })
-  }
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-if (process.env.NODE_ENV == 'production'){
+if (process.env.NODE_ENV === 'production'){
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 }
-else {
-	app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname+'/client/build/index.html'));
-	})
-}
+
 mongoose.connect(process.env.MONGODB_URI ||"mongodb://127.0.0.1:27017/Resident", {
   useNewUrlParser: true
 })
