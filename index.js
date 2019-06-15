@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8000;
 const mongoose = require('mongoose')
 const residentRoute = express.Router();
 let Resident = require("./models/model.js")
@@ -56,7 +56,7 @@ residentRoute.route('/add').post(function (req, res) {
 
 residentRoute.route('/update/:id').post(function (req, res) {
   var id = req.params.id
-  var data = req.body.documents.treatmentPlan
+  var data = req.body
   console.log(id)
   console.log(data)
   console.log("updating")
@@ -65,7 +65,7 @@ residentRoute.route('/update/:id').post(function (req, res) {
       _id: id
     }, {
       $set: {
-        "documents.treatmentPlan": data,
+        documents: data,
       }
     },
     (err, data) => {

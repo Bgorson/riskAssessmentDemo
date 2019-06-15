@@ -41,7 +41,7 @@ export default class CreateTodo extends Component {
                 <input onChange= {this.handleChange} name="resident_name"  type = "text" value = {this.state.resident_name} ></input>
                 </label>
                 <label>Date Arriving
-                <input onChange= {this.handleChange} name="resident_arrival"  type = "text" value = {this.state.resident_arrival} ></input>
+                <input onChange= {this.handleChange} name="resident_arrival"  type = "date" value = {this.state.resident_arrival} ></input>
                 </label>
                 <input type="submit"  />
                 </form>
