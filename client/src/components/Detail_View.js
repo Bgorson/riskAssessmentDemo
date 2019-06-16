@@ -7,7 +7,9 @@ class Detail_View extends Component {
         this.state = { 
             name:null,
             arrival:null,
-            treatment_date:''
+            treatment_date:'',
+            current:'',
+            nextConsent:''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -58,6 +60,8 @@ class Detail_View extends Component {
 
     componentDidMount(){
         const id  = this.props.match.params
+        let currentTime= new Date ();
+
         console.log(id)
         axios.get("/todos/detail/"+id.id).then(res => {
             console.log(res)
@@ -67,7 +71,9 @@ class Detail_View extends Component {
                 arrival: res.data.resident_arrival,
                 consent: (res.data.documents.consents),
                 treatmentPlan: res.data.documents.treatment_date,
-                admission: res.data.documents.admissionNote
+                admission: res.data.documents.admissionNote,
+                current:JSON.stringify(currentTime),
+                nextConsent : '20'+ (parseInt(res.data.resident_arrival.slice(2,4))+1)+ res.data.resident_arrival.slice(4,)
             })
         })
     }
@@ -76,21 +82,26 @@ class Detail_View extends Component {
         return ( 
             <div>
         <h1>You're looking at a detailed view</h1> 
+        <h2>Today's date: {this.state.current}</h2>
             <li>Name: {this.state.name}</li>
             <li>Date Arrived: {this.state.arrival}</li>
+            <br></br>
             <li className= {this.state.consent === true ? "true": "false" }>Consent on file: {this.state.consent}</li>
             <button onClick= {this.handleConsentClick}>Toggle consent</button>
-            <li> Next Consent due:  </li>
+            <li> Next Consent due: {this.state.nextConsent} </li>
+            <br></br>
             <li >Treatment Plan on file: {this.state.treatmentPlan}</li>
 
             <form onSubmit = {this.handleSubmit}>
                 <label> Treatment Date 
                 <input onChange = {this.handleChange} name= "treatment_date" type= "date" value = {this.state.treatment_date}></input>
             <input type= "submit"/>
+            <li>Next Treatment Plan due: </li>
             </label>
             </form>
-           
-            <li>Admission Note on file: {this.state.admission}</li>
+            <br></br>
+            <li>Admission Note on file? {this.state.admission}</li>
+            <br></br>
             </div>
         );
     }

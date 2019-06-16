@@ -7,9 +7,17 @@ import CreateTodo from "./components/create-todo"
 import Detail_View from './components/Detail_View';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+        currentTime:'',
+    }
+}
 
-
-
+componentDidMount(){
+  let currentTime= new Date ();
+  console.log(currentTime)
+}
   render() { 
     return (  
       <Router>
@@ -20,7 +28,9 @@ class App extends Component {
         </div>
         <Route path = "/" exact component = {TodosList} />
         <Route path = "/edit/:id" component = {EditTodo} />
-        <Route path = "/create" component = {CreateTodo}/>
+        <Route 
+            path = "/create" 
+            render = {()=> (<CreateTodo date= {this.state.currentTime}/>)} />
         <Route path = "/detail/:id" component = {Detail_View}/>
         </Router>
     )

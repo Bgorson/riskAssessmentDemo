@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import axios from 'axios'
 
 export default class CreateTodo extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state= {
             resident_name:'',
             resident_arrival:'',
+            currentDate:''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -36,6 +37,7 @@ export default class CreateTodo extends Component {
         return (
             <div>
                 <p>Welcome to Create Resident</p>
+                <h2>The date is: {this.props.date}</h2>
                 <form onSubmit={this.handleSubmit}>
                     <label> Resident Name
                 <input onChange= {this.handleChange} name="resident_name"  type = "text" value = {this.state.resident_name} ></input>
